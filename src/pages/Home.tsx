@@ -1,6 +1,6 @@
 import Autocomplete from 'components/Autocomplete';
 import { ChangeEvent, FormEvent, useState, type ReactElement } from 'react';
-import { CountryType, TaxFormElement } from '../types';
+import { CountryType } from '../types';
 
 export default function HomePage(): ReactElement {
   const [country, setCountry] = useState<CountryType>();
@@ -42,6 +42,7 @@ export default function HomePage(): ReactElement {
       username: inputValues.username,
       taxId: inputValues.taxId
     };
+    // https://app.wiremock.cloud/
     fetch('https://1zle5.wiremockapi.cloud/json', {
       method: 'POST',
       headers: {
@@ -65,29 +66,29 @@ export default function HomePage(): ReactElement {
 
   const validateForm = (event: FormEvent<HTMLFormElement>) => {
     const form = event.target as HTMLFormElement;
-    const usernameElement = form.username as TaxFormElement;
-    const taxIdElement = form.taxId as TaxFormElement;
+    const usernameElement = form.querySelector('.username') as HTMLInputElement;
+    const taxIdElement = form.querySelector('.tax-identifier');
     let messages = { taxId: '', username: '' };
     event.preventDefault();
 
     setApiResponse({ type: '', message: '' });
 
-    if (inputValues.username.length < 3) {
-      usernameElement.classList.remove('is-valid');
-      usernameElement.classList.add('is-invalid');
+    if (usernameElement?.value.length < 3) {
+      usernameElement?.classList.remove('is-valid');
+      usernameElement?.classList.add('is-invalid');
       messages.username = 'User name is required, and should be at least 3 characters';
     } else {
-      usernameElement.classList.remove('is-invalid');
-      usernameElement.classList.add('is-valid');
+      usernameElement?.classList.remove('is-invalid');
+      usernameElement?.classList.add('is-valid');
     }
 
     if (!validTaxId()) {
-      taxIdElement.classList.remove('is-valid');
-      taxIdElement.classList.add('is-invalid');
+      taxIdElement?.classList.remove('is-valid');
+      taxIdElement?.classList.add('is-invalid');
       messages.taxId = 'You Need a Valid Tax ID';
     } else {
-      taxIdElement.classList.remove('is-invalid');
-      taxIdElement.classList.add('is-valid');
+      taxIdElement?.classList.remove('is-invalid');
+      taxIdElement?.classList.add('is-valid');
     }
 
     setErrorMessage(messages);
@@ -104,7 +105,7 @@ export default function HomePage(): ReactElement {
           <form className='needs-validation' noValidate onSubmit={validateForm}>
             <div className="form-floating mb-3">
               <input
-                className="form-control"
+                className="form-control username"
                 placeholder="User name"
                 type="text"
                 name="username"
@@ -123,7 +124,7 @@ export default function HomePage(): ReactElement {
 
             <div className="form-floating mb-3">
               <input
-                className="form-control"
+                className="form-control tax-identifier"
                 placeholder="Tax Identifier"
                 type="text"
                 name="taxId"
