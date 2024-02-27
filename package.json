@@ -1,0 +1,43 @@
+{
+  "name": "deel",
+  "license": "MIT",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite --open",
+    "start": "vite --open"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-router-dom": "6.21.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.2.46",
+    "@types/react-dom": "18.2.18",
+    "@types/react-router-dom": "5.3.3",
+    "@typescript-eslint/eslint-plugin": "6.17.0",
+    "@typescript-eslint/parser": "6.17.0",
+    "@vitejs/plugin-react": "4.2.1",
+    "eslint": "8.56.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-airbnb-typescript": "17.1.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-react": "7.33.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-react-prefer-function-component": "3.3.0",
+    "typescript": "5.3.3",
+    "vite": "5.0.12",
+    "vite-plugin-pwa": "0.17.4",
+    "vite-tsconfig-paths": "4.2.3"
+  },
+  "browserslist": {
+    "production": "Edge >= 18, Firefox >= 60, Chrome >= 61, Safari >= 11, Opera >= 48",
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version"
+    ]
+  }
+}
