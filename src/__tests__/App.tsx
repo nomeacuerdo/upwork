@@ -5,16 +5,10 @@ import jest from 'jest-mock';
 
 import App from 'App';
 
-// Mock the global fetch function
-// global.fetch = jest.fn(() =>
-//   Promise.resolve({
-//     json: () => Promise.resolve({ data: 'Mocked Jest Fetch' }),
-//   }) as Promise<Response>
-// );
 jest.spyOn(global, 'fetch').mockImplementationOnce(() =>
   Promise.resolve({
     ok: true,
-    json: () => Promise.resolve({ data: 'Oli' }),
+    json: () => Promise.resolve({ data: 'Mock function' }),
   }) as Promise<Response>
 );
 
@@ -40,7 +34,10 @@ describe('<App />', () => {
 
   it('should change the username', async () => {
     const input = screen.getByPlaceholderText('User name') as HTMLInputElement;
-    userEvent.type(input, 'Sterling Archer');
+
+    await act(async () => {
+      userEvent.type(input, 'Sterling Archer');
+    });
 
     await waitFor(() => {
       expect(input.value).toBe('Sterling Archer');
@@ -58,7 +55,7 @@ describe('<App />', () => {
 
   it('should have the is-invalid class when no username is provided', async () => {
     const input = screen.getByPlaceholderText('User name');
-    userEvent.click(screen.getByText('Submit'))
+    userEvent.click(screen.getByText('Submit'));
 
     await waitFor(() => {
       expect(input).toHaveClass('is-invalid');
